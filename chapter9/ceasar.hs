@@ -1,3 +1,9 @@
+{-
+
+TODO: Think about unCeasarShift, what values to use in the pattern-matching when value is less than 97.
+
+-}
+
 module Cipher where
     import Data.Char
     
@@ -6,5 +12,9 @@ module Cipher where
     ceasarShift (x:xs) n
       | (ord x) + n > 122 = [(chr (71 + (mod ((ord x) + n) 97)))] ++ (ceasarShift xs n)
       | otherwise = [(chr ((ord x) + n))] ++ (ceasarShift xs n)
-    
-{-= [(chr (71 + (mod ((ord x) + 1) 123)))] ++ (ceasarShift xs)-}
+
+    unCeasarShift :: String -> Int -> String
+    ceasarShift "" n = ""
+    ceasarShift (x:xs) n
+      | (ord x) - n < 97 = [(chr (71 + (mod ((ord x) + n) 97)))] ++ (ceasarShift xs n)
+      | otherwise = [(chr ((ord x) + n))] ++ (ceasarShift xs n)
